@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zoom Phone — FAQ & Troubleshooting | UTEC</title>
+  <style>
+    :root {
+      --zoom-blue: #2D8CFF;
+      --dark-bg: #1A1A2E;
+      --light-bg: #F0F6FF;
+      --white: #FFFFFF;
+      --orange: #F39237;
+      --teal: #0D9488;
+      --text-dark: #1E2D3D;
+      --text-mid: #445566;
+      --text-light: #6B7A8D;
+      --border: #D1DCE8;
+      --green: #059669;
+      --red: #DC2626;
+      --yellow-bg: #FFFBEB;
+      --yellow-border: #F59E0B;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background: var(--light-bg);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--dark-bg);
+      border-top: 5px solid var(--zoom-blue);
+      padding: 36px 40px 28px;
+    }
+    header .eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #7090B0;
+      margin-bottom: 8px;
+    }
+    header h1 {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    header p {
+      font-size: 15px;
+      color: #AAAACC;
+    }
+
+    /* ── Layout ── */
+    .page-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* ── Section headings ── */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 40px 0 16px;
+    }
+    .section-label .dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .section-label h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    /* ── FAQ accordion ── */
+    .faq-list { display: flex; flex-direction: column; gap: 8px; }
+
+    details.faq-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: box-shadow 0.15s;
+    }
+    details.faq-item[open] {
+      box-shadow: 0 2px 12px rgba(45,140,255,0.10);
+      border-color: var(--zoom-blue);
+    }
+    details.faq-item summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-dark);
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+    }
+    details.faq-item summary::-webkit-details-marker { display: none; }
+    details.faq-item summary::after {
+      content: "+";
+      font-size: 20px;
+      font-weight: 300;
+      color: var(--zoom-blue);
+      flex-shrink: 0;
+      margin-left: 12px;
+      transition: transform 0.2s;
+    }
+    details.faq-item[open] summary::after {
+      content: "−";
+    }
+    .faq-body {
+      padding: 0 20px 18px;
+      font-size: 14.5px;
+      color: var(--text-mid);
+      border-top: 1px solid var(--border);
+    }
+    .faq-body p { margin-top: 12px; }
+    .faq-body ol, .faq-body ul {
+      margin: 10px 0 0 18px;
+    }
+    .faq-body li { margin-bottom: 5px; }
+    .faq-body code {
+      background: var(--light-bg);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+      color: var(--zoom-blue);
+    }
+    .faq-body .note {
+      background: #EFF6FF;
+      border-left: 3px solid var(--zoom-blue);
+      padding: 10px 14px;
+      border-radius: 0 6px 6px 0;
+      margin-top: 12px;
+      font-size: 13.5px;
+    }
+
+    /* ── Troubleshooting cards ── */
+    .trouble-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 600px) { .trouble-grid { grid-template-columns: 1fr; } }
+
+    .trouble-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .trouble-card .symptom {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .trouble-card .symptom .badge {
+      width: 8px; height: 8px;
+      background: var(--red);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .trouble-card ol {
+      padding-left: 18px;
+      font-size: 13.5px;
+      color: var(--text-mid);
+    }
+    .trouble-card ol li { margin-bottom: 5px; }
+
+    /* ── Known issues ── */
+    .known-issues-box {
+      background: var(--yellow-bg);
+      border: 1px solid var(--yellow-border);
+      border-radius: 10px;
+      padding: 20px 24px;
+    }
+    .known-issues-box .ki-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .known-issues-box .ki-header .icon {
+      width: 20px; height: 20px;
+      background: var(--yellow-border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+    }
+    .known-issues-box .ki-header span {
+      font-size: 15px;
+      font-weight: 700;
+      color: #92400E;
+    }
+    .ki-item {
+      display: flex;
+      gap: 12px;
+      padding: 10px 0;
+      border-top: 1px solid #FDE68A;
+      font-size: 14px;
+      color: #78350F;
+    }
+    .ki-item:first-of-type { border-top: none; padding-top: 0; }
+    .ki-item .ki-status {
+      flex-shrink: 0;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 2px 8px;
+      border-radius: 20px;
+      background: #FEF3C7;
+      color: #92400E;
+      border: 1px solid #FDE68A;
+      height: fit-content;
+      margin-top: 1px;
+    }
+    .ki-item .ki-status.resolved {
+      background: #D1FAE5;
+      color: #065F46;
+      border-color: #A7F3D0;
+    }
+
+    /* ── Escalation box ── */
+    .escalation-box {
+      background: var(--dark-bg);
+      border-radius: 12px;
+      padding: 28px 32px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 600px) { .escalation-box { grid-template-columns: 1fr; } }
+    .escalation-box .esc-block .esc-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #7090B0;
+      margin-bottom: 6px;
+    }
+    .escalation-box .esc-block .esc-value {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--white);
+    }
+    .escalation-box .esc-block .esc-sub {
+      font-size: 13px;
+      color: #AAAACC;
+      margin-top: 3px;
+    }
+    .escalation-box .esc-block a {
+      color: var(--zoom-blue);
+      text-decoration: none;
+    }
+
+    .when-to-escalate {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-top: 14px;
+    }
+    .when-to-escalate h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+    .when-to-escalate ul {
+      padding-left: 18px;
+      font-size: 14px;
+      color: var(--text-mid);
+    }
+    .when-to-escalate ul li { margin-bottom: 5px; }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 12px;
+      color: var(--text-light);
+      border-top: 1px solid var(--border);
+      margin-top: 20px;
+    }
+
+    /* ── Print styles ── */
+    @media print {
+      header { background: #333; }
+      details.faq-item { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">UTEC Internal — Zoom Phone</div>
+  <h1>FAQ &amp; Troubleshooting</h1>
+  <p>Common questions, troubleshooting steps, known issues, and how to get additional help.</p>
+</header>
+
+<div class="page-wrap">
+
+  <!-- ── COMMON QUESTIONS ── -->
+  <div class="section-label">
+    <div class="dot" style="background:#2D8CFF;"></div>
+    <h2>Common Questions</h2>
+  </div>
+
+  <div class="faq-list">
+
+    <details class="faq-item">
+      <summary>What is my new Zoom Phone number?</summary>
+      <div class="faq-body">
+        <p>Your Zoom Phone number was assigned when IT provisioned your account. You can find it in two places:</p>
+        <ol>
+          <li>Open the Zoom app and click or tap <strong>Phone</strong> in the sidebar.</li>
+          <li>Your assigned number appears at the top of the Phone screen.</li>
+        </ol>
+        <p>Alternatively, sign in to the <strong>Zoom web portal</strong> at <code>zoom.us</code>, go to <strong>Profile</strong>, and look for the Phone Number field.</p>
+        <div class="note">If no number appears, your account provisioning may still be in progress. Check with IT — it typically completes within 24 hours of accepting your invite.</div>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Can I keep my existing phone number (number porting)?</summary>
+      <div class="faq-body">
+        <p>Number porting — transferring your current phone number to Zoom — may be possible depending on your carrier. This is handled by UTEC IT in coordination with Zoom support. The process typically takes 2–4 weeks.</p>
+        <p>If you need your existing number ported, contact IT Support with the following information:</p>
+        <ol>
+          <li>Current phone number</li>
+          <li>Current carrier name</li>
+          <li>Account holder name on the carrier account</li>
+        </ol>
+        <div class="note">Until porting is complete, your calls will go to your newly assigned Zoom Phone number.</div>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How do I set up call forwarding?</summary>
+      <div class="faq-body">
+        <p>Call forwarding is managed through the Zoom web portal:</p>
+        <ol>
+          <li>Go to <code>zoom.us</code> and sign in with your UTEC Google account.</li>
+          <li>Click <strong>Phone</strong> in the left sidebar, then select <strong>Settings</strong>.</li>
+          <li>Under <strong>Call Handling</strong>, find the <strong>Forward to</strong> option.</li>
+          <li>Enter the number or extension you want calls forwarded to.</li>
+          <li>Set the conditions (e.g., forward when busy, when unanswered, or always).</li>
+          <li>Click <strong>Save</strong>.</li>
+        </ol>
+        <div class="note">You can also set your status to <strong>Do Not Disturb</strong> in the Zoom app to send all incoming calls straight to voicemail without setting up forwarding.</div>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How do I set up or change my voicemail greeting?</summary>
+      <div class="faq-body">
+        <p>Your voicemail greeting is managed in the Zoom web portal. You can record a custom greeting or upload an audio file:</p>
+        <ol>
+          <li>Sign in at <code>zoom.us</code> with your UTEC Google account.</li>
+          <li>Click <strong>Phone</strong> → <strong>Settings</strong>.</li>
+          <li>Scroll down to <strong>Greeting &amp; Leave Voicemail Instruction</strong>.</li>
+          <li>Click <strong>Edit</strong> next to the voicemail greeting.</li>
+          <li>Choose <strong>Add Audio</strong> and either record directly in your browser or upload an MP3/WAV file.</li>
+          <li>Save your changes.</li>
+        </ol>
+        <p>See the <em>Account Setup</em> guide (slides 9–12) for annotated screenshots of this process.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How do I access my voicemail messages?</summary>
+      <div class="faq-body">
+        <ol>
+          <li>Open the Zoom app and click or tap <strong>Phone</strong>.</li>
+          <li>Select the <strong>Voicemail</strong> tab at the top.</li>
+          <li>Click or tap any message to play it. A text transcript appears below the playback controls.</li>
+          <li>To call back: tap the phone icon next to the message.</li>
+          <li>To delete: swipe left on mobile, or right-click the message on desktop.</li>
+        </ol>
+        <div class="note">Voicemail transcripts are automatically generated by Zoom and may not be 100% accurate for technical terms or proper names.</div>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Can I use Zoom Phone on my personal mobile device?</summary>
+      <div class="faq-body">
+        <p>Yes. Install the <strong>Zoom Workplace</strong> app from the App Store (iPhone) or Google Play (Android), then sign in using SSO with your <code>@utecinc.org</code> Google account.</p>
+        <p>See the <strong>Mobile App Setup</strong> guide for step-by-step installation instructions for both iOS and Android.</p>
+        <div class="note">Using Zoom Phone on a personal device uses your phone's data or Wi-Fi — there are no additional charges to your UTEC account for mobile use.</div>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How do I transfer a call to another person?</summary>
+      <div class="faq-body">
+        <p>During an active call, you have two transfer options:</p>
+        <ol>
+          <li>Click or tap the <strong>Transfer</strong> button in the in-call controls.</li>
+          <li>A dialog will appear — search for a colleague by name or enter their number.</li>
+          <li>Choose <strong>Warm Transfer</strong> (stay on the line until the other person picks up) or <strong>Blind Transfer</strong> (transfer immediately without waiting).</li>
+          <li>Confirm the transfer.</li>
+        </ol>
+        <div class="note">You can also transfer directly to a voicemail box — useful if the recipient is unavailable and you don't want to ring their line.</div>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What happens to my calls when I'm away or on Do Not Disturb?</summary>
+      <div class="faq-body">
+        <p><strong>Do Not Disturb:</strong> Set your status to DND in the Zoom app. All incoming calls will go directly to voicemail. Your status appears as a moon icon to other users.</p>
+        <p><strong>Away:</strong> Setting your status to Away does not automatically forward calls — callers will still ring through. Use call forwarding or DND to control call routing when you're unavailable.</p>
+        <p><strong>Offline / App closed:</strong> If the Zoom app is not running on any device, calls typically go to voicemail after a short ring period.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Can I make and receive calls from a web browser (no app)?</summary>
+      <div class="faq-body">
+        <p>Yes, with limitations. Zoom Phone is accessible via browser at <code>zoom.us</code> → <strong>Phone</strong>, but the full calling experience (including receiving inbound calls) requires the desktop or mobile app to be running.</p>
+        <p>For reliable call handling — especially receiving calls — it is strongly recommended to keep the Zoom desktop or mobile app installed and running.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How do I find a colleague's extension or direct number?</summary>
+      <div class="faq-body">
+        <ol>
+          <li>Open the Zoom app and click or tap <strong>Phone</strong>.</li>
+          <li>Select the <strong>Contacts</strong> tab.</li>
+          <li>Search by name to find any UTEC employee with a Zoom Phone number.</li>
+          <li>Click their name to call them directly.</li>
+        </ol>
+        <p>You can also dial colleagues by their extension directly from the keypad — check with IT for the internal extension list.</p>
+      </div>
+    </details>
+
+  </div><!-- /faq-list -->
+
+
+  <!-- ── TROUBLESHOOTING ── -->
+  <div class="section-label" style="margin-top:48px;">
+    <div class="dot" style="background:#DC2626;"></div>
+    <h2>Troubleshooting</h2>
+  </div>
+
+  <div class="trouble-grid">
+
+    <div class="trouble-card">
+      <div class="symptom"><span class="badge"></span>No audio — caller can't hear me / I can't hear the caller</div>
+      <ol>
+        <li>Check that your microphone and speaker (or headset) are not muted at the system level.</li>
+        <li>In the Zoom app, click your profile picture → <strong>Settings</strong> → <strong>Audio</strong>. Select the correct input and output devices.</li>
+        <li>Ensure Zoom has microphone permission: on Mac, check System Settings → Privacy &amp; Security → Microphone. On Windows, check Settings → Privacy → Microphone.</li>
+        <li>Try ending and restarting the call.</li>
+        <li>Restart the Zoom app and attempt the call again.</li>
+      </ol>
+    </div>
+
+    <div class="trouble-card">
+      <div class="symptom"><span class="badge"></span>Can't sign in / "Invalid SSO domain" error</div>
+      <ol>
+        <li>When prompted for the company domain, enter exactly: <strong>utecinc</strong> (no spaces, no .org).</li>
+        <li>Make sure you're signing in via <strong>SSO</strong> — not with an email/password or a personal Zoom account.</li>
+        <li>Ensure you're using your <code>@utecinc.org</code> Google account, not a personal Gmail.</li>
+        <li>Clear your browser cache and try again, or try a different browser.</li>
+        <li>Sign out of all Zoom sessions at <code>zoom.us/profile</code> and sign back in.</li>
+      </ol>
+    </div>
+
+    <div class="trouble-card">
+      <div class="symptom"><span class="badge"></span>Zoom app crashes or freezes</div>
+      <ol>
+        <li>Force-quit the Zoom app and reopen it.</li>
+        <li>Check for updates: click your profile picture → <strong>Check for Updates</strong>. Install any available update.</li>
+        <li>Restart your computer or mobile device.</li>
+        <li>Uninstall and reinstall the Zoom app (your settings and call history are stored on Zoom's servers and will sync back).</li>
+        <li>If crashes continue, note the time and contact IT — they can pull diagnostic logs.</li>
+      </ol>
+    </div>
+
+    <div class="trouble-card">
+      <div class="symptom"><span class="badge"></span>Incoming calls not ringing on my device</div>
+      <ol>
+        <li>Check that your device volume is turned up and not on silent/vibrate-only.</li>
+        <li>In the Zoom app, go to <strong>Settings</strong> → <strong>Audio</strong> and confirm your ringtone output device is correct.</li>
+        <li>Make sure your status is not set to <strong>Do Not Disturb</strong>.</li>
+        <li>Check Zoom's notification settings in your OS (Mac: System Settings → Notifications → Zoom; Windows: Settings → Notifications → Zoom).</li>
+        <li>On mobile, ensure Zoom app notifications are enabled in your phone's notification settings.</li>
+        <li>Make sure the Zoom app is not in a paused/background-restricted state on mobile.</li>
+      </ol>
+    </div>
+
+    <div class="trouble-card">
+      <div class="symptom"><span class="badge"></span>Phone tab is missing in the Zoom app</div>
+      <ol>
+        <li>Confirm your account has been provisioned with a Zoom Phone license. Not all Zoom accounts include Phone — check with IT.</li>
+        <li>Sign out of the Zoom app and sign back in using SSO (<code>utecinc</code>).</li>
+        <li>Update to the latest version of the Zoom app.</li>
+        <li>If still missing after the above steps, contact IT — your license may need to be re-assigned.</li>
+      </ol>
+    </div>
+
+    <div class="trouble-card">
+      <div class="symptom"><span class="badge"></span>Poor call quality (echo, choppy audio, static)</div>
+      <ol>
+        <li>Check your internet connection — Zoom Phone requires a stable broadband connection (minimum 1 Mbps up/down for voice calls).</li>
+        <li>Move closer to your Wi-Fi router, or connect via Ethernet if possible.</li>
+        <li>Close other bandwidth-heavy applications (video streaming, large downloads).</li>
+        <li>Try a different headset or audio device to rule out hardware issues.</li>
+        <li>In Zoom Settings → Audio, disable <strong>Enable Original Sound</strong> if it's on, and ensure noise suppression is enabled.</li>
+      </ol>
+    </div>
+
+  </div><!-- /trouble-grid -->
+
+
+  <!-- ── KNOWN ISSUES ── -->
+  <div class="section-label" style="margin-top:48px;">
+    <div class="dot" style="background:#F59E0B;"></div>
+    <h2>Known Issues</h2>
+  </div>
+
+  <div class="known-issues-box">
+    <div class="ki-header">
+      <div class="icon">!</div>
+      <span>Current known issues — updated by IT Support as needed</span>
+    </div>
+
+    <div class="ki-item">
+      <span class="ki-status">Monitoring</span>
+      <div>
+        <strong>Voicemail transcripts delayed</strong> — Some users are experiencing a delay of up to 10 minutes before voicemail transcripts appear in the app. The audio message is available immediately; the text transcript follows shortly after. No action needed.
+      </div>
+    </div>
+
+    <div class="ki-item">
+      <span class="ki-status resolved">Resolved</span>
+      <div>
+        <strong>Sign-in loop on iOS 17</strong> — A redirect issue during SSO sign-in affected some iPhone users on iOS 17.0. Resolved by updating to iOS 17.2 or later and reinstalling the Zoom Workplace app.
+      </div>
+    </div>
+
+    <div class="ki-item">
+      <span class="ki-status">Monitoring</span>
+      <div>
+        <strong>Call history not syncing across devices</strong> — A small number of users have reported that calls made on mobile are not appearing in the desktop app's call history. Zoom is aware of this issue. Workaround: view call history in the mobile app or via the Zoom web portal at <code>zoom.us</code>.
+      </div>
+    </div>
+
+  </div><!-- /known-issues-box -->
+
+
+  <!-- ── ESCALATION PATH ── -->
+  <div class="section-label" style="margin-top:48px;">
+    <div class="dot" style="background:#0D9488;"></div>
+    <h2>Get Additional Help</h2>
+  </div>
+
+  <div class="escalation-box">
+    <div class="esc-block">
+      <div class="esc-label">Email IT Support</div>
+      <div class="esc-value"><a href="mailto:it@utecinc.org">it@utecinc.org</a></div>
+      <div class="esc-sub">Include your name, phone number, and a brief description of the issue. Response within 1 business day.</div>
+    </div>
+    <div class="esc-block">
+      <div class="esc-label">Help Desk Ticket</div>
+      <div class="esc-value">Submit a ticket</div>
+      <div class="esc-sub">For non-urgent issues, submit a help desk ticket through your IT portal. Include "Zoom Phone" in the subject line.</div>
+    </div>
+    <div class="esc-block">
+      <div class="esc-label">Slack / Chat</div>
+      <div class="esc-value">#it-support</div>
+      <div class="esc-sub">For quick questions, reach out in the #it-support Slack channel. Best for simple questions that don't require a ticket.</div>
+    </div>
+    <div class="esc-block">
+      <div class="esc-label">Urgent / Outage</div>
+      <div class="esc-value">Call IT directly</div>
+      <div class="esc-sub">If Zoom Phone is completely down and you cannot make or receive business-critical calls, contact IT directly via your cell phone.</div>
+    </div>
+  </div>
+
+  <div class="when-to-escalate">
+    <h4>When to contact IT Support (vs. self-resolve)</h4>
+    <ul>
+      <li>You've followed the troubleshooting steps above and the issue persists</li>
+      <li>You cannot sign in and SSO troubleshooting has not resolved it</li>
+      <li>Your Zoom Phone number is incorrect or missing</li>
+      <li>You need a number ported from your existing carrier</li>
+      <li>You need call forwarding configured to an outside line</li>
+      <li>Another user is experiencing the same issue (possible account-level or network issue)</li>
+      <li>You receive any error codes — include the exact error message when contacting IT</li>
+    </ul>
+  </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+  UTEC Internal — Zoom Phone Onboarding Hub &nbsp;|&nbsp; Last updated March 2026 &nbsp;|&nbsp; Questions? Contact <a href="mailto:it@utecinc.org" style="color:#2D8CFF;">it@utecinc.org</a>
+</footer>
+
+</body>
+</html>
