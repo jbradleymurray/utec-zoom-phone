@@ -181,21 +181,48 @@
       margin: 0;
     }
 
-    /* ── Announcement Box ── */
-    .announcement-box {
-      background: #FFFAEB;
-      border: 1px solid #FDE68A;
-      border-radius: 10px;
-      padding: 18px 20px;
-      margin: 28px 0;
-      border-left: 4px solid #F59E0B;
+    /* ── Navigation Cards Grid ── */
+    .nav-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 32px 0 28px;
     }
 
-    .announcement-box p {
-      font-size: 14px;
-      color: #92400E;
+    .nav-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: block;
+    }
+
+    .nav-card:hover {
+      border-color: var(--accent-orange);
+      box-shadow: 0 4px 12px rgba(232, 121, 43, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .nav-card-icon {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .nav-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+
+    .nav-card p {
+      font-size: 13px;
+      color: var(--text-mid);
       margin: 0;
-      font-weight: 500;
+      line-height: 1.5;
     }
 
     /* ── Help Card ── */
@@ -586,6 +613,10 @@
         gap: 14px;
       }
 
+      .nav-cards {
+        grid-template-columns: 1fr 1fr;
+      }
+
       .page-container {
         padding: 32px 16px 60px;
       }
@@ -696,8 +727,27 @@
       </div>
     </div>
 
-    <div class="announcement-box">
-      <p><strong>March 2026 — Rollout underway.</strong> All 125 UTEC employees are being provisioned. You'll receive an invitation email from Zoom when your account is ready.</p>
+    <div class="nav-cards">
+      <div class="nav-card" onclick="switchPage('account-setup')">
+        <div class="nav-card-icon">⚙️</div>
+        <h3>Account Setup</h3>
+        <p>Activate your Zoom Phone account — guided steps with annotated screenshots.</p>
+      </div>
+      <div class="nav-card" onclick="switchPage('how-to-use')">
+        <div class="nav-card-icon">📞</div>
+        <h3>How to Use the Phone</h3>
+        <p>Make calls, check voicemail, transfer calls, and more — one guide per task.</p>
+      </div>
+      <div class="nav-card" onclick="switchPage('mobile-app')">
+        <div class="nav-card-icon">📱</div>
+        <h3>Mobile App Setup</h3>
+        <p>Install Zoom Phone on your iPhone or Android and sign in with your UTEC account.</p>
+      </div>
+      <div class="nav-card" onclick="switchPage('faq')">
+        <div class="nav-card-icon">❓</div>
+        <h3>FAQ &amp; Troubleshooting</h3>
+        <p>Common questions, troubleshooting steps, and how to get additional help.</p>
+      </div>
     </div>
 
     <div class="help-card">
