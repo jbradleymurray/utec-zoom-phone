@@ -225,6 +225,85 @@
       line-height: 1.5;
     }
 
+    /* ── Path Selector ── */
+    .path-selector {
+      display: flex;
+      gap: 16px;
+      margin: 24px 0 8px;
+    }
+
+    .path-card {
+      flex: 1;
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: left;
+    }
+
+    .path-card:hover {
+      border-color: var(--accent-orange);
+      box-shadow: 0 4px 14px rgba(232, 121, 43, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .path-card.selected {
+      border-color: var(--accent-orange);
+      background: #FFF8F3;
+      box-shadow: 0 4px 14px rgba(232, 121, 43, 0.15);
+    }
+
+    .path-card-icon {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .path-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+
+    .path-card p {
+      font-size: 13.5px;
+      color: var(--text-mid);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .path-content {
+      display: none;
+      margin-top: 8px;
+    }
+
+    .path-content.active {
+      display: block;
+      animation: fadeIn 0.25s ease-in;
+    }
+
+    .path-back {
+      display: inline-block;
+      font-size: 13px;
+      color: var(--text-light);
+      cursor: pointer;
+      margin-bottom: 20px;
+      padding: 6px 0;
+    }
+
+    .path-back:hover {
+      color: var(--accent-orange);
+      text-decoration: none;
+    }
+
+    @media (max-width: 600px) {
+      .path-selector {
+        flex-direction: column;
+      }
+    }
+
     /* ── Help Card ── */
     .help-card {
       background: #F0FFF4;
@@ -706,7 +785,7 @@
         <div class="checklist-number">1</div>
         <div class="checklist-content">
           <h3>Set up your account</h3>
-          <p>Accept your Zoom invitation and activate your phone number. Takes about 5–10 minutes.</p>
+          <p>Whether you're new to Zoom or already use it, we'll walk you through getting Zoom Phone activated. Takes about 5–10 minutes.</p>
         </div>
       </div>
 
@@ -731,7 +810,7 @@
       <div class="nav-card" onclick="switchPage('account-setup')">
         <div class="nav-card-icon">⚙️</div>
         <h3>Account Setup</h3>
-        <p>Activate your Zoom Phone account — guided steps with annotated screenshots.</p>
+        <p>Set up Zoom Phone on your account — guided steps whether you're new to Zoom or already use it.</p>
       </div>
       <div class="nav-card" onclick="switchPage('how-to-use')">
         <div class="nav-card-icon">📞</div>
@@ -765,73 +844,145 @@
   <div id="account-setup" class="page">
     <h1>Setting Up Your Zoom Phone Account</h1>
 
-    <p>Your Zoom Phone account setup takes about 5–10 minutes and requires access to your @utecinc.org email and a computer with internet.</p>
+    <p>Your setup takes about 5–10 minutes. The steps are slightly different depending on whether you already use Zoom for meetings. Pick the option below that applies to you.</p>
 
-    <div class="info-box">
-      <strong>Prerequisites:</strong> You'll need access to your @utecinc.org email account and a web browser to accept your Zoom invitation.
+    <!-- Path Selector -->
+    <div id="path-selector-anchor"></div>
+    <div class="path-selector">
+      <div class="path-card" data-path="path-new" onclick="selectPath('path-new')">
+        <div class="path-card-icon">🆕</div>
+        <h3>I'm new to Zoom</h3>
+        <p>I don't have a Zoom account yet, or I've never used Zoom at UTEC.</p>
+      </div>
+      <div class="path-card" data-path="path-existing" onclick="selectPath('path-existing')">
+        <div class="path-card-icon">✅</div>
+        <h3>I already use Zoom</h3>
+        <p>I use Zoom for meetings with my @utecinc.org account.</p>
+      </div>
     </div>
 
-    <p>Click each section below to expand the instructions.</p>
+    <!-- ── PATH A: New to Zoom ── -->
+    <div id="path-new" class="path-content">
+      <span class="path-back" onclick="resetPath()">← Not the right path? Choose again</span>
 
-    <!-- Section 1 -->
-    <details>
-      <summary>Accept Your Zoom Invitation — Steps 1–2</summary>
-      <div class="section-body">
-        <p>Check your @utecinc.org email for an invitation from Zoom. Click the activation link in the email to begin setting up your account.</p>
-        <img src="images/p2-account-setup--s1-accept-invitation--step01-accept-email.png" alt="Step 1: Accept email invitation">
-        <img src="images/p2-account-setup--s1-accept-invitation--step02-accept-account-change.png" alt="Step 2: Accept account change prompt">
-        <div class="tip-box">
-          <strong>You'll know you're done when:</strong> You see a confirmation that your Zoom account has been activated.
-        </div>
+      <div class="info-box">
+        <strong>What you'll need:</strong> Access to your @utecinc.org email to accept your Zoom invitation, and a computer with the Zoom app installed (or a web browser).
       </div>
-    </details>
 
-    <!-- Section 2 -->
-    <details>
-      <summary>Sign In to Your Account — Steps 3–5</summary>
-      <div class="section-body">
-        <p>Open the Zoom app (or go to zoom.us). Sign in using the Google SSO option and select your @utecinc.org account.</p>
-        <img src="images/p2-account-setup--s2-sign-in--step03-sign-in-to-profile.png" alt="Step 3: Sign in to profile">
-        <img src="images/p2-account-setup--s2-sign-in--step04-sign-in-with-google.png" alt="Step 4: Sign in with Google">
-        <img src="images/p2-account-setup--s2-sign-in--step05-choose-account.png" alt="Step 5: Choose @utecinc.org account">
-        <div class="tip-box">
-          <strong>You'll know you're done when:</strong> You're signed in to Zoom and can see the main app interface.
+      <p>Click each section below to expand the instructions.</p>
+
+      <details>
+        <summary>Step 1 — Accept Your Zoom Invitation</summary>
+        <div class="section-body">
+          <p>Check your @utecinc.org email for an invitation from Zoom. Click the activation link in the email to begin setting up your account.</p>
+          <img src="images/p2-account-setup--s1-accept-invitation--step01-accept-email.png" alt="Step 1: Accept email invitation">
+          <img src="images/p2-account-setup--s1-accept-invitation--step02-accept-account-change.png" alt="Step 2: Accept account change prompt">
+          <div class="tip-box">
+            <strong>You'll know you're done when:</strong> You see a confirmation that your Zoom account has been activated.
+          </div>
         </div>
-      </div>
-    </details>
+      </details>
 
-    <!-- Section 3 -->
-    <details>
-      <summary>Complete Your Phone Setup — Steps 6–8</summary>
-      <div class="section-body">
-        <p>In the Zoom app, click the Phone tab in the left sidebar. You'll see a setup prompt — click Setup and create a voicemail PIN (4–6 digits).</p>
-        <img src="images/p2-account-setup--s3-phone-setup--step06-click-phone-tab.png" alt="Step 6: Click Phone tab">
-        <img src="images/p2-account-setup--s3-phone-setup--step07-set-pin-and-setup.png" alt="Step 7: Set PIN and setup">
-        <img src="images/p2-account-setup--s3-phone-setup--step08-phone-settings-screen.png" alt="Step 8: Phone settings screen">
-        <div class="tip-box">
-          <strong>You'll know you're done when:</strong> You see the Phone tab with a dial pad and your assigned number.
+      <details>
+        <summary>Step 2 — Sign In to Zoom</summary>
+        <div class="section-body">
+          <p>Open the Zoom app (or go to zoom.us). Sign in using the Google option and select your @utecinc.org account.</p>
+          <img src="images/p2-account-setup--s2-sign-in--step03-sign-in-to-profile.png" alt="Sign in to profile">
+          <img src="images/p2-account-setup--s2-sign-in--step04-sign-in-with-google.png" alt="Sign in with Google">
+          <img src="images/p2-account-setup--s2-sign-in--step05-choose-account.png" alt="Choose @utecinc.org account">
+          <div class="tip-box">
+            <strong>You'll know you're done when:</strong> You're signed in and can see the main Zoom interface.
+          </div>
         </div>
-      </div>
-    </details>
+      </details>
 
-    <!-- Section 4 -->
-    <details>
-      <summary>Set Up Your Voicemail — Steps 9–12</summary>
-      <div class="section-body">
-        <p>Go to the Zoom web portal to configure your voicemail. You can record a custom greeting, upload an audio file, or keep the default greeting.</p>
-        <img src="images/p2-account-setup--s4-voicemail--step09-edit-greeting.png" alt="Step 9: Edit greeting">
-        <img src="images/p2-account-setup--s4-voicemail--step10-add-audio.png" alt="Step 10: Add audio">
-        <img src="images/p2-account-setup--s4-voicemail--step11-add-audio-dialog.png" alt="Step 11: Audio upload dialog">
-        <img src="images/p2-account-setup--s4-voicemail--step12-enter-voicemail-message.png" alt="Step 12: Enter voicemail message">
-        <div class="tip-box">
-          <strong>You'll know you're done when:</strong> Your voicemail greeting is set and notifications are configured.
+      <details>
+        <summary>Step 3 — Enable Zoom Phone</summary>
+        <div class="section-body">
+          <p>Click the Phone tab in the left sidebar of the Zoom app. You'll see a setup prompt — click Setup and create a voicemail PIN (4–6 digits).</p>
+          <img src="images/p2-account-setup--s3-phone-setup--step06-click-phone-tab.png" alt="Click Phone tab">
+          <img src="images/p2-account-setup--s3-phone-setup--step07-set-pin-and-setup.png" alt="Set PIN and setup">
+          <img src="images/p2-account-setup--s3-phone-setup--step08-phone-settings-screen.png" alt="Phone settings screen">
+          <div class="tip-box">
+            <strong>You'll know you're done when:</strong> You see the Phone tab with a dial pad and your assigned number.
+          </div>
         </div>
-      </div>
-    </details>
+      </details>
 
-    <div class="success-box">
-      <strong>What happens next?</strong> Your Zoom Phone account is now active. You can start making and receiving calls right away using the Zoom desktop app or web browser.
+      <details>
+        <summary>Step 4 — Set Up Your Voicemail</summary>
+        <div class="section-body">
+          <p>Go to the Zoom web portal to configure your voicemail greeting. You can record a custom greeting, upload an audio file, or keep the default.</p>
+          <img src="images/p2-account-setup--s4-voicemail--step09-edit-greeting.png" alt="Edit greeting">
+          <img src="images/p2-account-setup--s4-voicemail--step10-add-audio.png" alt="Add audio">
+          <img src="images/p2-account-setup--s4-voicemail--step11-add-audio-dialog.png" alt="Audio upload dialog">
+          <img src="images/p2-account-setup--s4-voicemail--step12-enter-voicemail-message.png" alt="Enter voicemail message">
+          <div class="tip-box">
+            <strong>You'll know you're done when:</strong> Your voicemail greeting is saved.
+          </div>
+        </div>
+      </details>
+
+      <div class="success-box">
+        <strong>You're all set!</strong> Your Zoom Phone account is now active. You can start making and receiving calls right away using the Zoom desktop app or web browser.
+      </div>
     </div>
+
+    <!-- ── PATH B: Already Use Zoom ── -->
+    <div id="path-existing" class="path-content">
+      <span class="path-back" onclick="resetPath()">← Not the right path? Choose again</span>
+
+      <div class="info-box">
+        <strong>Good news:</strong> Since you already have a Zoom account, IT has added Zoom Phone to it. You won't receive a new invitation email — just open Zoom and follow the steps below to get your phone set up.
+      </div>
+
+      <p>Click each section below to expand the instructions.</p>
+
+      <details>
+        <summary>Step 1 — Open Zoom and Make Sure You're Signed In</summary>
+        <div class="section-body">
+          <p>Open the Zoom app on your computer (or go to zoom.us). Make sure you're signed in with your @utecinc.org Google account. If you're already signed in, you're all set — move to Step 2.</p>
+          <img src="images/p2-account-setup--s2-sign-in--step03-sign-in-to-profile.png" alt="Sign in to profile">
+          <img src="images/p2-account-setup--s2-sign-in--step04-sign-in-with-google.png" alt="Sign in with Google">
+          <img src="images/p2-account-setup--s2-sign-in--step05-choose-account.png" alt="Choose @utecinc.org account">
+          <div class="tip-box">
+            <strong>You'll know you're done when:</strong> You can see the main Zoom interface and your @utecinc.org name appears in the top right.
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Step 2 — Enable Zoom Phone</summary>
+        <div class="section-body">
+          <p>Look for the Phone tab in the left sidebar of the Zoom app. Click it — you'll see a setup prompt asking you to create a voicemail PIN (4–6 digits).</p>
+          <img src="images/p2-account-setup--s3-phone-setup--step06-click-phone-tab.png" alt="Click Phone tab">
+          <img src="images/p2-account-setup--s3-phone-setup--step07-set-pin-and-setup.png" alt="Set PIN and setup">
+          <img src="images/p2-account-setup--s3-phone-setup--step08-phone-settings-screen.png" alt="Phone settings screen">
+          <div class="tip-box">
+            <strong>Don't see the Phone tab?</strong> Your license may still be processing. Wait 15 minutes and try again. If it's still missing, post in #team-new-phone-testers on Slack.
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Step 3 — Set Up Your Voicemail</summary>
+        <div class="section-body">
+          <p>Go to the Zoom web portal to configure your voicemail greeting. You can record a custom greeting, upload an audio file, or keep the default.</p>
+          <img src="images/p2-account-setup--s4-voicemail--step09-edit-greeting.png" alt="Edit greeting">
+          <img src="images/p2-account-setup--s4-voicemail--step10-add-audio.png" alt="Add audio">
+          <img src="images/p2-account-setup--s4-voicemail--step11-add-audio-dialog.png" alt="Audio upload dialog">
+          <img src="images/p2-account-setup--s4-voicemail--step12-enter-voicemail-message.png" alt="Enter voicemail message">
+          <div class="tip-box">
+            <strong>You'll know you're done when:</strong> Your voicemail greeting is saved.
+          </div>
+        </div>
+      </details>
+
+      <div class="success-box">
+        <strong>You're all set!</strong> Your Zoom Phone account is now active. You can start making and receiving calls right away using the Zoom desktop app or web browser.
+      </div>
+    </div>
+
   </div>
 
   <!-- ════════════════════════════════════════════════════════════════════════════════════ -->
@@ -1298,6 +1449,27 @@
 </footer>
 
 <script>
+  function selectPath(pathId) {
+    // Update card selected state
+    document.querySelectorAll('.path-card').forEach(card => card.classList.remove('selected'));
+    const selectedCard = document.querySelector(`[data-path="${pathId}"]`);
+    if (selectedCard) selectedCard.classList.add('selected');
+
+    // Show the chosen path, hide the other
+    document.querySelectorAll('.path-content').forEach(el => el.classList.remove('active'));
+    const content = document.getElementById(pathId);
+    if (content) {
+      content.classList.add('active');
+      content.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  function resetPath() {
+    document.querySelectorAll('.path-card').forEach(card => card.classList.remove('selected'));
+    document.querySelectorAll('.path-content').forEach(el => el.classList.remove('active'));
+    document.getElementById('path-selector-anchor').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   function switchPage(pageId) {
     // Hide all pages
     const pages = document.querySelectorAll('.page');
